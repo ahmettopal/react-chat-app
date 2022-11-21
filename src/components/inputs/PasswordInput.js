@@ -1,47 +1,16 @@
-import React from 'react';
-import {
-  InputGroup,
-  Input,
-  InputRightElement,
-  Button,
-  Icon,
-  InputLeftElement,
-} from '@chakra-ui/react';
-import { Eye, Lock } from '../icons';
+import React from "react";
+import { Input } from "@chakra-ui/react";
 
-function PasswordInput({
-  showLeftIcon = true,
-  inputGroupProps = {},
-  ...props
-}) {
-  const [show, setShow] = React.useState(false);
-  const handleClick = () => setShow(!show);
-
+function PasswordInput({ ...props }) {
   return (
-    <InputGroup
-      my={'3'}
-      backgroundColor={'light'}
-      size={'lg'}
-      {...inputGroupProps}
-    >
-      {showLeftIcon && (
-        <InputLeftElement
-          pointerEvents="none"
-         // children={<Icon as={Lock} color="default" />}
-        />
-      )}
-      <Input
-        type={show ? 'text' : 'password'}
-        placeholder="Parola"
-        borderWidth={0}
-        {...props}
-      />
-      <InputRightElement>
-        <Button backgroundColor={'transparent'} onClick={handleClick}>
-          {/*<Icon as={Eye} color="default" />*/}
-        </Button>
-      </InputRightElement>
-    </InputGroup>
+    <Input
+      p={1}
+      variant="flushed"
+      w={250}
+      type={"password"}
+      placeholder="Password"
+      {...props}
+    />
   );
 }
 
