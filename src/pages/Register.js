@@ -13,18 +13,18 @@ const Register = () => {
   const imageInput = useRef();
 
   const validation = yup.object({
-    name: yup.string().required("Lütfen adınızı giriniz"),
+    name: yup.string().required("Please enter your name"),
     email: yup
       .string()
-      .email("Geçersiz email adresi")
-      .required("Lütfen email adresinizi giriniz"),
+      .email("Invalid e-mail adress")
+      .required("Please enter your e-mail adress"),
     password: yup
       .string()
-      .min(6, "En az 6 karakter olmalıdır")
-      .required("Lütfen sifrenizi giriniz"),
+      .min(6, "Must be at least 6 characters")
+      .required("Please enter your password"),
     passwordConfirm: yup
       .string()
-      .oneOf([yup.ref("password"), null], "Şifreler Uyuşmuyor"),
+      .oneOf([yup.ref("password"), null], "Passwords do not match"),
   });
 
   const { values, setValues, errors, isValid, setValuesDirectly } = useForm(
@@ -59,6 +59,7 @@ const Register = () => {
       justifyContent={"center"}
     >
       <Box
+        display="flex"
         backgroundColor={"white"}
         p="12"
         borderRadius={"md"}
@@ -117,9 +118,8 @@ const Register = () => {
           </Box>
 
           <Button
-            backgroundColor={"#7b96ec"}
+            backgroundColor={"button"}
             borderRadius={"md"}
-            isFullWidth
             border={"none"}
             onClick={onSubmit}
           >
@@ -128,7 +128,7 @@ const Register = () => {
             </Text>
           </Button>
         </Box>
-        <Text color={"#a7bcff"} fontSize="12px" mt={"10px"}>
+        <Text color={"title"} fontSize="12px" mt={"10px"}>
           You do have an account? Login
         </Text>
       </Box>
