@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
-import { Sidebar } from "../components";
+import { Sidebar, Chat } from "../components";
 
 const Home = () => {
   return (
@@ -19,6 +19,7 @@ const Home = () => {
         overflow={"hidden"}
       >
         <Sidebar />
+        <Chat/>
       </Box>
     </Box>
   );
