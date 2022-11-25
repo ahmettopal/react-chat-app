@@ -7,3 +7,4 @@ export { default as Input } from "./inputs/Input";
 export { default as Chats } from "./Chats";
 export { default as UserCard } from "./cards/UserCard";
 export { default as Chat } from "./Chat";
+export { default as Messages} from './message/Messages'
