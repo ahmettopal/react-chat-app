@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Text, Icon } from "@chakra-ui/react";
 import { Camera, More, Add } from "./icons";
-import { Messages } from ".";
+import { Messages , ChatInput} from ".";
 
 const Chat = () => {
   return (
@@ -23,6 +23,7 @@ const Chat = () => {
         </Box>
       </Box>
       <Messages />
+      <ChatInput />
     </Box>
   );
 };
