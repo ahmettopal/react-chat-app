@@ -26,7 +26,7 @@ const Message = () => {
           borderRadius="50%"
           objectFit={"cover"}
         />
-        <Text>Just now</Text>
+        <Text color={'GrayText '}>just now</Text>
       </Box>
       <Box
         maxW={"80%"}
