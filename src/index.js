@@ -7,15 +7,18 @@ import reportWebVitals from "./reportWebVitals";
 import { ChakraProvider } from "@chakra-ui/react";
 import { ColorModeScript } from "@chakra-ui/react";
 import theme from "./theme";
+import { AuthContextProvider } from "./context/AuthContext";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <ChakraProvider theme={theme}>
-      <ColorModeScript initialColorMode="light" />
-      <App />
-    </ChakraProvider>
-  </React.StrictMode>
+  <AuthContextProvider>
+    <React.StrictMode>
+      <ChakraProvider theme={theme}>
+        <ColorModeScript initialColorMode="light" />
+        <App />
+      </ChakraProvider>
+    </React.StrictMode>
+  </AuthContextProvider>
 );
 
 // If you want your app to work offline and load faster, you can change

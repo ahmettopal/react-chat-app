@@ -1,5 +1,7 @@
 import React from "react";
 import { Box, Button, Text, Image } from "@chakra-ui/react";
+import { signOut } from "firebase/auth";
+import { auth } from "../components/Firebase";
 
 const Navbar = () => {
   return (
@@ -27,6 +29,7 @@ const Navbar = () => {
         />
         <Text>ahmet</Text>
         <Button
+          onClick={() => signOut(auth)}
           backgroundColor={"button"}
           fontSize={"12px"}
           border={"none"}
