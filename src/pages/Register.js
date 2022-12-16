@@ -16,8 +16,14 @@ import { useNavigate, Link } from "react-router-dom";
 
 const Register = () => {
   const imageInput = useRef();
-  const [err, setErr] = useState(false);
+  const [err, setErr] = useState({
+    name: "",
+    password: "",
+    email: "",
+    passconfirm: "",
+  });
   const [loading, setLoading] = useState(false);
+  const [imgLoading, setImgLoading] = useState(false);
   const [image, setImage] = useState(null);
   const navigate = useNavigate();
 
@@ -47,6 +53,16 @@ const Register = () => {
   );
 
   const onSubmit = async () => {
+    if (!isValid) {
+      setErr({
+        name: errors.name,
+        password: errors.password,
+        email: errors.email,
+        passconfirm: errors.passwordConfirm,
+      });
+      return;
+    }
+
     setLoading(true);
     const displayName = values.name;
     const email = values.email;
@@ -82,13 +98,13 @@ const Register = () => {
             navigate("/");
           } catch (err) {
             console.log(err);
-            setErr(true);
+            //setErr(true);
             setLoading(false);
           }
         });
       });
     } catch (err) {
-      setErr(true);
+      //setErr(true);
       setLoading(false);
     }
   };
@@ -98,8 +114,10 @@ const Register = () => {
   };
 
   const onUploadImage = async (e) => {
+    setImgLoading(true);
     const image = e.target.files[0];
     setImage(image);
+    setImgLoading(false);
     //onChange({ url: URL.createObjectURL(image), image });
   };
 
@@ -136,23 +154,26 @@ const Register = () => {
             onChange={setValues}
             value={values.name}
           />
+          {err.name && <Text>{err.name}</Text>}
           <AuthInput
             placeholder="E-Posta"
             name="email"
             onChange={setValues}
             value={values.email}
           />
+          {err.email && <Text>{err.email}</Text>}
           <PasswordInput
             name="password"
             onChange={setValues}
             value={values.password}
           />
+          {err.password && <Text>{err.password}</Text>}
           <PasswordInput
             name="passwordConfirm"
             onChange={setValues}
             value={values.passwordConfirm}
           />
-
+          {err.passconfirm && <Text>{err.passconfirm}</Text>}
           <Input
             ref={imageInput}
             type="file"
@@ -171,7 +192,7 @@ const Register = () => {
               Add an avatar
             </Text>
           </Box>
-
+          {imgLoading && <Text>"Uploading and compressing the image please wait..."</Text>}
           <Button
             backgroundColor={"button"}
             borderRadius={"md"}
@@ -184,7 +205,8 @@ const Register = () => {
           </Button>
         </Box>
         <Text color={"title"} fontSize="12px" mt={"10px"}>
-          You do have an account? Login
+          You do have an account? {' '}
+          <Link to="/login">Login</Link>
         </Text>
       </Box>
     </Box>

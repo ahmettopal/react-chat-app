@@ -1,14 +1,21 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useState } from "react";
 import { Box, Text, Button } from "@chakra-ui/react";
 import { PasswordInput, AuthInput } from "../components";
 import useForm from "../hooks/useForm";
 import * as yup from "yup";
 import BackGroundImage from "../assets/img/mesh.jpeg";
+import { useNavigate, Link } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../components/Firebase";
 
 const Login = () => {
+  const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
+
   const validation = yup.object({
     email: yup
       .string()
@@ -28,7 +35,25 @@ const Login = () => {
     validation
   );
 
-  const onSubmit = async () => {};
+  const onSubmit = async () => {
+    if (!isValid) {
+      setErr({
+        password: errors.password,
+        email: errors.email,
+      });
+      return;
+    }
+    setLoading(true);
+    const email = values.email;
+    const password = values.password;
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      setLoading(false);
+      navigate("/");
+    } catch (err) {
+      //setErr(true);
+    }
+  };
 
   return (
     <Box
@@ -63,11 +88,13 @@ const Login = () => {
             onChange={setValues}
             value={values.email}
           />
+          {err.email && <Text>{err.email}</Text>}
           <PasswordInput
             name="password"
             onChange={setValues}
             value={values.password}
           />
+           {err.password && <Text>{err.password}</Text>}
 
           <Button
             backgroundColor={"button"}
@@ -81,7 +108,7 @@ const Login = () => {
           </Button>
         </Box>
         <Text color={"title"} fontSize="12px" mt={"10px"}>
-          You don't have an account? Register
+          You don't have an account? <Link to="/register">Register</Link>
         </Text>
       </Box>
     </Box>
