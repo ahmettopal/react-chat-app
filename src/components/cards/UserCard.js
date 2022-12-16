@@ -1,10 +1,18 @@
 import React from "react";
 import { Box, Text, Image } from "@chakra-ui/react";
 
-const UserCard = ({ image, username, message }) => {
+const UserCard = ({ onClick = () => {}, image, username, message }) => {
   return (
-    <>
-      <Image src={image} alt="" w={"45px"} h={"45px"} />
+    <Box
+      p={"10px"}
+      display="flex"
+      alignItems={"center"}
+      gap="10px"
+      color={"white"}
+      cursor={"pointer"}
+      onClick={onClick}
+    >
+      <Image src={image} alt="" w={"45px"} h={"45px"} borderRadius={"50%"} />
       <Box>
         <Text fontSize={"18px"} fontWeight={"500"}>
           {username}
@@ -13,7 +21,7 @@ const UserCard = ({ image, username, message }) => {
           {message}
         </Text>
       </Box>
-    </>
+    </Box>
   );
 };
 
